@@ -373,17 +373,6 @@ function App() {
           ))}
         </section>
 
-        <section className="py-8">
-          <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-5 py-3 text-sm text-cyan-100">
-            <span className="font-medium">
-              {locale === "rw" ? "Abasuye uru rubuga" : "Website visits"}
-            </span>
-            <span className="text-base font-semibold text-white">
-              {visits ?? (locale === "rw" ? "Birabarwa..." : "Counting...")}
-            </span>
-          </div>
-        </section>
-
         <section className="grid gap-12 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
           <SectionHeading eyebrow={t.aboutEyebrow} title={t.aboutTitle} />
           <div>
@@ -524,7 +513,15 @@ function App() {
 
       <footer className="border-t border-white/10 py-8">
         <div className="mx-auto flex w-[min(1180px,calc(100%-28px))] flex-col gap-3 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
-          <p>{t.footerBlurb}</p>
+          <div className="flex flex-col gap-2">
+            <p>{t.footerBlurb}</p>
+            <p className="text-cyan-200">
+              {locale === "rw" ? "Abasuye uru rubuga" : "Website visits"}:{" "}
+              <span className="font-semibold text-white">
+                {visits ?? (locale === "rw" ? "Birabarwa..." : "Counting...")}
+              </span>
+            </p>
+          </div>
           <p>© 2026 Heritier Ndayishimiye Irakoze. {t.rights}</p>
         </div>
       </footer>
