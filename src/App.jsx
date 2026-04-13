@@ -198,6 +198,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("overview");
   const [copied, setCopied] = useState(false);
   const [locale, setLocale] = useState(() => localStorage.getItem("cv-locale") || "en");
+  const [visits, setVisits] = useState(null);
   const t = content[locale];
 
   useEffect(() => {
@@ -221,6 +222,32 @@ function App() {
     localStorage.setItem("cv-locale", locale);
     document.documentElement.lang = locale === "rw" ? "rw" : "en";
   }, [locale]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadVisits = async () => {
+      try {
+        const response = await fetch(
+          "https://api.countapi.xyz/hit/her1t1er-new-portfolio/visits"
+        );
+        const data = await response.json();
+        if (!cancelled && typeof data.value === "number") {
+          setVisits(data.value);
+        }
+      } catch {
+        if (!cancelled) {
+          setVisits(null);
+        }
+      }
+    };
+
+    loadVisits();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleCopy = async () => {
     try {
@@ -344,6 +371,17 @@ function App() {
               <p className="mt-2 text-sm leading-7 text-slate-400">{stat.detail}</p>
             </div>
           ))}
+        </section>
+
+        <section className="py-8">
+          <div className="inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-5 py-3 text-sm text-cyan-100">
+            <span className="font-medium">
+              {locale === "rw" ? "Abasuye uru rubuga" : "Website visits"}
+            </span>
+            <span className="text-base font-semibold text-white">
+              {visits ?? (locale === "rw" ? "Birabarwa..." : "Counting...")}
+            </span>
+          </div>
         </section>
 
         <section className="grid gap-12 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
