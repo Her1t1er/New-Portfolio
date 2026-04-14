@@ -108,7 +108,7 @@ const content = {
     ],
     pdfCta: "Fungura CV",
     heroKicker: "Umunyeshuri wa Computer and Software Engineering",
-    heroTitle: "Heritier\nNdayishimiye\nIrakoze",
+    heroTitle: "Heritier\nNDAYISHIMIYE\nIRAKOZE",
     heroText:
       "Ni umunyeshuri ufite umuhate kandi witonda mu kazi, ufite ubumenyi bw'ibanze bukomeye muri imibare, fiziki na mudasobwa. Yibanda kuri web design, UI design na web development, kandi ashishikajwe no gukora ibisubizo by'ikoranabuhanga byoroshye gukoresha kandi bigezweho.",
     primaryCta: "Vugana Nanjye",
