@@ -32,7 +32,7 @@ const content = {
     ],
     pdfCta: "Open CV",
     heroKicker: "Computer and Software Engineering Student",
-    heroTitle: "Heritier\nNdayishimiye\nIrakoze",
+    heroTitle: "Heritier\nNDAYISHIMIYE\nIRAKOZE",
     heroText:
       "Motivated and detail-oriented developer with a strong academic foundation in mathematics, physics, and computer science. Focused on web design, UI design, and web development, with a clear interest in building practical digital products that are clean, usable, and modern.",
     primaryCta: "Get in Touch",
@@ -42,7 +42,7 @@ const content = {
     stats: [
       { value: "2024", title: "University Journey", detail: "Started BSc studies in Computer and Software Engineering" },
       { value: "2+", title: "Certifications", detail: "Web design and IoT learning milestones" },
-      { value: "3", title: "Languages", detail: "Kinyarwanda, English, and French" },
+      { value: "4", title: "Languages", detail: "Kinyarwanda, English, swahili and French" },
     ],
     aboutEyebrow: "about me",
     aboutTitle: "Builder. Learner. Future Engineer.",
@@ -102,6 +102,7 @@ const content = {
       { name: "Kinyarwanda", level: "Native" },
       { name: "English", level: "Proficiency" },
       { name: "French", level: "Basic" },
+      { name: "Swahili", level: "Medium" },
     ],
     interestsEyebrow: "interests",
     interestsTitle: "What Interests Me",
@@ -140,7 +141,7 @@ const content = {
     ],
     pdfCta: "Fungura CV",
     heroKicker: "Umunyeshuri wa Computer and Software Engineering",
-    heroTitle: "Heritier\nNdayishimiye\nIrakoze",
+    heroTitle: "Heritier\nNDAYISHIMIYE\nIRAKOZE",
     heroText:
       "Ni umunyeshuri ufite umuhate kandi witonda mu kazi, ufite ubumenyi bw'ibanze bukomeye muri imibare, fiziki na mudasobwa. Yibanda kuri web design, UI design na web development, kandi ashishikajwe no gukora ibisubizo by'ikoranabuhanga byoroshye gukoresha kandi bigezweho.",
     primaryCta: "Vugana Nanjye",
@@ -150,7 +151,7 @@ const content = {
     stats: [
       { value: "2024", title: "Urugendo rwa Kaminuza", detail: "Yatangiye amasomo ya Computer and Software Engineering" },
       { value: "2+", title: "Impamyabushobozi", detail: "Intambwe mu kwiga web design na IoT" },
-      { value: "3", title: "Indimi", detail: "Ikinyarwanda, Icyongereza n'Igifaransa" },
+      { value: "4", title: "Indimi", detail: "Ikinyarwanda, Icyongereza, Igiswahili n'Igifaransa" },
     ],
     aboutEyebrow: "ibyanjye",
     aboutTitle: "Umwubatsi. Umwigira. Injeniyeri uri gukura.",
@@ -210,6 +211,7 @@ const content = {
       { name: "Ikinyarwanda", level: "Ururimi kavukire" },
       { name: "Icyongereza", level: "Avuga neza" },
       { name: "Igifaransa", level: "Shingiro" },
+      { name: "Igiswahili", level: "Aracyivuga akanacyumva" },
     ],
     interestsEyebrow: "ibyo nkunda",
     interestsTitle: "Ibintu Binsunikira",
