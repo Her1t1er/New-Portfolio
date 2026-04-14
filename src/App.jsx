@@ -1,5 +1,24 @@
 import { useEffect, useState } from "react";
+import { 
+  Instagram, 
+  Twitter, 
+  Github, 
+  Send, 
+  Code2, 
+  Moon, 
+  Sun, 
+  Mail, 
+  Phone, 
+  MessageSquare, 
+  User, 
+  Type,
+  ExternalLink,
+  MapPin
+} from "lucide-react";
 import cvPdf from "../CV.pdf";
+import photo2 from "../photos/IMG_0876.JPG";
+import photo3 from "../photos/IMG_1621.jpg";
+import photo4 from "../photos/IMG_2778.JPEG";
 
 const content = {
   en: {
@@ -7,6 +26,7 @@ const content = {
       { id: "overview", label: "About" },
       { id: "education", label: "Education" },
       { id: "skills", label: "Skills" },
+      { id: "gallery", label: "Gallery" },
       { id: "credentials", label: "Awards" },
       { id: "contact", label: "Contact" },
     ],
@@ -64,6 +84,13 @@ const content = {
         items: ["Web Design", "Web Development", "UI Design"],
       },
     ],
+    galleryEyebrow: "gallery",
+    galleryTitle: "Moments & Memories",
+    galleryImages: [
+      { src: photo2, alt: "Heritier Portrait 2" },
+      { src: photo3, alt: "Heritier Portrait 3" },
+      { src: photo4, alt: "Heritier Portrait 4" },
+    ],
     credentialsEyebrow: "credentials",
     credentialsTitle: "Certifications and Languages",
     certifications: [
@@ -88,6 +115,11 @@ const content = {
     contactTitle: "Available for learning, collaboration, and growth opportunities.",
     contactText:
       "This website presents the CV in a more personal and accessible format, while the original PDF remains available for direct sharing.",
+    formName: "Full Name",
+    formSubject: "Subject",
+    formMessage: "Message",
+    formSend: "Send Message",
+    socialsTitle: "Connect With Me",
     copyEmail: "Copy Email",
     sendEmail: "Send Email",
     copied: "Email copied to clipboard.",
@@ -102,6 +134,7 @@ const content = {
       { id: "overview", label: "Incamake" },
       { id: "education", label: "Amashuri" },
       { id: "skills", label: "Ubumenyi" },
+      { id: "gallery", label: "Amafoto" },
       { id: "credentials", label: "Impamyabushobozi" },
       { id: "contact", label: "Twandikire" },
     ],
@@ -159,6 +192,13 @@ const content = {
         items: ["Web Design", "Web Development", "UI Design"],
       },
     ],
+    galleryEyebrow: "amafoto",
+    galleryTitle: "Ibihe n'Urwibutso",
+    galleryImages: [
+      { src: photo2, alt: "Heritier Portrait 2" },
+      { src: photo3, alt: "Heritier Portrait 3" },
+      { src: photo4, alt: "Heritier Portrait 4" },
+    ],
     credentialsEyebrow: "impamyabushobozi",
     credentialsTitle: "Impamyabushobozi n'Indimi",
     certifications: [
@@ -183,6 +223,11 @@ const content = {
     contactTitle: "Yiteguye amahirwe yo kwiga, gukorana n'abandi no gukura mu mwuga.",
     contactText:
       "Uru rubuga rwerekana CV mu buryo busomeka kandi bw'umwihariko, mu gihe PDF y'umwimerere igikomeza kuboneka kugira ngo isangizwe byoroshye.",
+    formName: "Izina Ryuzuye",
+    formSubject: "Intego",
+    formMessage: "Ubutumwa",
+    formSend: "Ohereza Ubutumwa",
+    socialsTitle: "Twandikire hano",
     copyEmail: "Koporora Email",
     sendEmail: "Ohereza Email",
     copied: "Email yakoporowe.",
@@ -194,10 +239,19 @@ const content = {
   },
 };
 
+const socials = [
+  { name: "Instagram", icon: Instagram, url: "https://instagram.com/heritier._", handle: "@heritier._" },
+  { name: "Twitter", icon: Twitter, url: "https://x.com/ik1nege", handle: "@ik1nege" },
+  { name: "GitHub", icon: Github, url: "https://github.com/her1tier", handle: "her1tier" },
+  { name: "Telegram", icon: Send, url: "https://t.me/her1tier", handle: "@her1tier" },
+  { name: "LeetCode", icon: Code2, url: "https://leetcode.com/u/heritier_/", handle: "heritier_" },
+];
+
 function App() {
   const [activeSection, setActiveSection] = useState("overview");
   const [copied, setCopied] = useState(false);
   const [locale, setLocale] = useState(() => localStorage.getItem("cv-locale") || "en");
+  const [theme, setTheme] = useState(() => localStorage.getItem("cv-theme") || "dark");
   const [visits, setVisits] = useState(null);
   const t = content[locale];
 
@@ -224,16 +278,25 @@ function App() {
   }, [locale]);
 
   useEffect(() => {
+    localStorage.setItem("cv-theme", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  useEffect(() => {
     let cancelled = false;
 
     const loadVisits = async () => {
       try {
         const response = await fetch(
-          "https://api.countapi.xyz/hit/her1t1er-new-portfolio/visits"
+          "https://api.counterapi.dev/v1/heritier-irakoze-portfolio/visits/up"
         );
         const data = await response.json();
-        if (!cancelled && typeof data.value === "number") {
-          setVisits(data.value);
+        if (!cancelled && typeof data.count === "number") {
+          setVisits(data.count);
         }
       } catch {
         if (!cancelled) {
@@ -259,13 +322,24 @@ function App() {
     }
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get("name");
+    const subject = formData.get("subject");
+    const message = formData.get("message");
+    
+    const mailtoUrl = `mailto:ndirakozeheritier@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\n\n${message}`)}`;
+    window.location.href = mailtoUrl;
+  };
+
   return (
-    <div className="min-h-screen bg-ink text-slate-100">
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(14,165,233,0.12),transparent_24%),linear-gradient(180deg,#081120_0%,#0b1424_48%,#081120_100%)]" />
-      <div className="fixed inset-0 -z-10 bg-grid bg-[size:44px_44px] opacity-30" />
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/70 backdrop-blur">
+    <div className="min-h-screen">
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(14,165,233,0.12),transparent_24%),linear-gradient(180deg,#f8fafc_0%,#f1f5f9_48%,#f8fafc_100%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.16),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(14,165,233,0.12),transparent_24%),linear-gradient(180deg,#081120_0%,#0b1424_48%,#081120_100%)]" />
+      <div className="fixed inset-0 -z-10 bg-grid bg-[size:44px_44px] opacity-[0.03] dark:opacity-30" />
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/70 backdrop-blur dark:border-white/10 dark:bg-slate-950/70">
         <div className="mx-auto flex w-[min(1180px,calc(100%-28px))] items-center justify-between gap-4 py-4">
-          <a href="#overview" className="text-lg font-semibold tracking-tight text-slate-100">
+          <a href="#overview" className="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100">
             Heritier Irakoze
           </a>
 
@@ -274,8 +348,8 @@ function App() {
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                className={`text-sm transition ${
-                  activeSection === section.id ? "text-cyan-300" : "text-slate-400 hover:text-slate-100"
+                className={`text-sm font-medium transition ${
+                  activeSection === section.id ? "text-blue-600 dark:text-cyan-300" : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
                 }`}
               >
                 {section.label}
@@ -284,15 +358,21 @@ function App() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1">
-              <span className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
-                {t.langLabel}
-              </span>
+            <button
+              type="button"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10"
+              aria-label="Toggle Theme"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-white p-1 dark:border-white/10 dark:bg-white/5">
               <button
                 type="button"
                 onClick={() => setLocale("en")}
-                className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                  locale === "en" ? "bg-cyan-400 text-slate-950" : "text-slate-300"
+                className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
+                  locale === "en" ? "bg-blue-600 text-white dark:bg-cyan-400 dark:text-slate-950" : "text-slate-500 dark:text-slate-300"
                 }`}
               >
                 {t.langEn}
@@ -300,21 +380,13 @@ function App() {
               <button
                 type="button"
                 onClick={() => setLocale("rw")}
-                className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                  locale === "rw" ? "bg-cyan-400 text-slate-950" : "text-slate-300"
+                className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
+                  locale === "rw" ? "bg-blue-600 text-white dark:bg-cyan-400 dark:text-slate-950" : "text-slate-500 dark:text-slate-300"
                 }`}
               >
                 {t.langRw}
               </button>
             </div>
-            <a
-              href={cvPdf}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-200 transition hover:border-cyan-300 hover:bg-cyan-300/10"
-            >
-              {t.pdfCta}
-            </a>
           </div>
         </div>
       </header>
@@ -322,16 +394,16 @@ function App() {
       <main className="mx-auto w-[min(1180px,calc(100%-28px))]">
         <section id="overview" className="grid min-h-[calc(100vh-76px)] items-center gap-10 py-12 md:grid-cols-[1.35fr_0.65fr]">
           <div>
-            <p className="text-sm uppercase tracking-[0.28em] text-cyan-300">{t.heroKicker}</p>
-            <h1 className="mt-5 whitespace-pre-line text-5xl font-semibold leading-[0.9] tracking-tight text-white sm:text-6xl lg:text-8xl">
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-blue-600 dark:text-cyan-300">{t.heroKicker}</p>
+            <h1 className="mt-5 whitespace-pre-line text-5xl font-extrabold leading-[0.9] tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-8xl">
               {t.heroTitle}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t.heroText}</p>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">{t.heroText}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#contact"
-                className="rounded-full bg-gradient-to-r from-accent to-cyan-400 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                className="rounded-full bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-700 dark:bg-gradient-to-r dark:from-accent dark:to-cyan-400 dark:hover:opacity-90"
               >
                 {t.primaryCta}
               </a>
@@ -339,47 +411,47 @@ function App() {
                 href={cvPdf}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-slate-100 transition hover:bg-white/5"
+                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-50 dark:border-white/15 dark:bg-transparent dark:text-slate-100 dark:hover:bg-white/5"
               >
                 {t.secondaryCta}
               </a>
             </div>
 
-            <div className="mt-12 flex items-center gap-6 text-sm text-slate-400">
-              <span>{t.locationLine}</span>
+            <div className="mt-12 flex items-center gap-6 text-sm font-medium text-slate-400 dark:text-slate-500">
+              <span className="flex items-center gap-2"><MapPin size={14} /> {t.locationLine}</span>
               <span>{t.scrollLabel}</span>
             </div>
           </div>
 
           <div className="justify-self-start md:justify-self-end">
-            <div className="relative flex h-[320px] w-[260px] items-end overflow-hidden rounded-[38px] border border-cyan-400/15 bg-slate-950/50 p-7 shadow-panel sm:h-[420px] sm:w-[320px]">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(96,165,250,0.18),rgba(2,8,23,0.2))]" />
+            <div className="relative flex h-[320px] w-[260px] items-end overflow-hidden rounded-[38px] border border-slate-200 bg-white p-7 shadow-xl dark:border-cyan-400/15 dark:bg-slate-950/50 dark:shadow-panel sm:h-[420px] sm:w-[320px]">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(59,130,246,0.05),rgba(255,255,255,0))] dark:bg-[linear-gradient(180deg,rgba(96,165,250,0.18),rgba(2,8,23,0.2))]" />
               <div className="relative">
-                <div className="mb-4 h-20 w-20 rounded-full border border-cyan-300/40 bg-white/10" />
-                <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">{t.locationLine}</p>
-                <p className="mt-2 text-2xl font-semibold text-white">HI</p>
+                <div className="mb-4 h-20 w-20 rounded-full border border-blue-200 bg-blue-50 dark:border-cyan-300/40 dark:bg-white/10" />
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-blue-600 dark:text-cyan-200">{t.locationLine}</p>
+                <p className="mt-2 text-2xl font-extrabold text-slate-900 dark:text-white">HI</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid gap-px overflow-hidden rounded-[34px] border border-white/10 bg-white/10 md:grid-cols-3">
+        <section className="grid gap-px overflow-hidden rounded-[34px] border border-slate-200 bg-slate-200 dark:border-white/10 dark:bg-white/10 md:grid-cols-3">
           {t.stats.map((stat) => (
-            <div key={stat.title} className="bg-white/5 p-7 backdrop-blur">
-              <p className="text-5xl font-semibold tracking-tight text-white">{stat.value}</p>
-              <p className="mt-4 text-lg font-medium text-slate-100">{stat.title}</p>
-              <p className="mt-2 text-sm leading-7 text-slate-400">{stat.detail}</p>
+            <div key={stat.title} className="bg-white p-7 backdrop-blur dark:bg-white/5">
+              <p className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">{stat.value}</p>
+              <p className="mt-4 text-lg font-bold text-slate-900 dark:text-slate-100">{stat.title}</p>
+              <p className="mt-2 text-sm leading-7 text-slate-500 dark:text-slate-400">{stat.detail}</p>
             </div>
           ))}
         </section>
 
-        <section className="grid gap-12 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
+        <section className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
           <SectionHeading eyebrow={t.aboutEyebrow} title={t.aboutTitle} />
           <div>
-            <p className="max-w-3xl text-lg leading-9 text-slate-300">{t.aboutBody}</p>
+            <p className="max-w-3xl text-lg leading-9 text-slate-600 dark:text-slate-300">{t.aboutBody}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               {t.focusTags.map((tag) => (
-                <span key={tag} className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-100">
+                <span key={tag} className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700 dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100">
                   {tag}
                 </span>
               ))}
@@ -387,21 +459,24 @@ function App() {
           </div>
         </section>
 
-        <section id="education" className="grid gap-12 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
+        <section id="education" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
           <SectionHeading eyebrow={t.educationEyebrow} title={t.educationTitle} lead={t.educationLead} />
           <div className="space-y-10">
             {t.education.map((item) => (
-              <article key={item.title} className="border-b border-white/10 pb-10 last:border-b-0 last:pb-0">
+              <article key={item.title} className="border-b border-slate-100 pb-10 last:border-b-0 last:pb-0 dark:border-white/10">
                 <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.22em] text-cyan-300">{item.period}</p>
-                    <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
-                    <p className="mt-2 text-base text-slate-400">{item.place}</p>
+                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-600 dark:text-cyan-300">{item.period}</p>
+                    <h3 className="mt-3 text-2xl font-bold text-slate-900 dark:text-white">{item.title}</h3>
+                    <p className="mt-2 text-base font-medium text-slate-500 dark:text-slate-400">{item.place}</p>
                   </div>
                 </div>
-                <ul className="mt-5 space-y-3 text-slate-300">
+                <ul className="mt-5 space-y-3 font-medium text-slate-600 dark:text-slate-300">
                   {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
+                    <li key={bullet} className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400 dark:bg-cyan-400" />
+                      {bullet}
+                    </li>
                   ))}
                 </ul>
               </article>
@@ -409,15 +484,15 @@ function App() {
           </div>
         </section>
 
-        <section id="skills" className="grid gap-12 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
+        <section id="skills" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
           <SectionHeading eyebrow={t.skillsEyebrow} title={t.skillsTitle} />
           <div className="grid gap-8 md:grid-cols-2">
             {t.skillGroups.map((group) => (
-              <div key={group.title} className="rounded-[30px] border border-white/10 bg-white/5 p-7">
-                <h3 className="text-xl font-semibold text-white">{group.title}</h3>
+              <div key={group.title} className="rounded-[30px] border border-slate-200 bg-white p-7 dark:border-white/10 dark:bg-white/5">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{group.title}</h3>
                 <div className="mt-5 flex flex-wrap gap-3">
                   {group.items.map((item) => (
-                    <span key={item} className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-100 shadow-sm">
+                    <span key={item} className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700 shadow-sm dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100">
                       {item}
                     </span>
                   ))}
@@ -427,41 +502,57 @@ function App() {
           </div>
         </section>
 
-        <section id="credentials" className="grid gap-12 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
+        <section id="gallery" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
+          <SectionHeading eyebrow={t.galleryEyebrow} title={t.galleryTitle} />
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {t.galleryImages.map((image, index) => (
+              <div key={index} className="group relative aspect-[3/4] overflow-hidden rounded-[30px] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100 dark:from-slate-950/60" />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="credentials" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
           <SectionHeading eyebrow={t.credentialsEyebrow} title={t.credentialsTitle} />
           <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
-            <div className="rounded-[30px] border border-white/10 bg-white/5 p-7">
-              <h3 className="text-xl font-semibold text-white">Certifications</h3>
+            <div className="rounded-[30px] border border-slate-200 bg-white p-7 dark:border-white/10 dark:bg-white/5">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Certifications</h3>
               <div className="mt-6 space-y-6">
                 {t.certifications.map((cert) => (
-                  <div key={cert.title} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
-                    <p className="text-sm uppercase tracking-[0.22em] text-cyan-300">{cert.date}</p>
-                    <h4 className="mt-2 text-lg font-medium text-white">{cert.title}</h4>
-                    <p className="mt-1 text-slate-400">{cert.issuer}</p>
+                  <div key={cert.title} className="border-b border-slate-100 pb-6 last:border-b-0 last:pb-0 dark:border-white/10">
+                    <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-600 dark:text-cyan-300">{cert.date}</p>
+                    <h4 className="mt-2 text-lg font-bold text-slate-900 dark:text-white">{cert.title}</h4>
+                    <p className="mt-1 font-medium text-slate-500 dark:text-slate-400">{cert.issuer}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="space-y-8">
-              <div className="rounded-[30px] border border-white/10 bg-white/5 p-7">
-                <h3 className="text-xl font-semibold text-white">{t.languagesTitle}</h3>
+              <div className="rounded-[30px] border border-slate-200 bg-white p-7 dark:border-white/10 dark:bg-white/5">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{t.languagesTitle}</h3>
                 <div className="mt-6 space-y-4">
                   {t.languages.map((language) => (
-                    <div key={language.name} className="flex items-center justify-between gap-4 border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
-                      <span className="font-medium text-white">{language.name}</span>
-                      <span className="text-sm text-slate-400">{language.level}</span>
+                    <div key={language.name} className="flex items-center justify-between gap-4 border-b border-slate-100 pb-4 last:border-b-0 last:pb-0 dark:border-white/10">
+                      <span className="font-bold text-slate-900 dark:text-white">{language.name}</span>
+                      <span className="text-sm font-medium text-slate-500 dark:text-slate-400">{language.level}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-[30px] border border-cyan-400/15 bg-slate-950/60 p-7 text-white">
-                <p className="text-sm uppercase tracking-[0.22em] text-cyan-300">{t.interestsEyebrow}</p>
-                <h3 className="mt-3 text-xl font-semibold">{t.interestsTitle}</h3>
+              <div className="rounded-[30px] border border-blue-100 bg-blue-50/50 p-7 text-slate-900 dark:border-cyan-400/15 dark:bg-slate-950/60 dark:text-white">
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-600 dark:text-cyan-300">{t.interestsEyebrow}</p>
+                <h3 className="mt-3 text-xl font-bold">{t.interestsTitle}</h3>
                 <div className="mt-5 flex flex-wrap gap-3">
                   {t.interests.map((interest) => (
-                    <span key={interest} className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-100">
+                    <span key={interest} className="rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-bold text-blue-700 dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100">
                       {interest}
                     </span>
                   ))}
@@ -471,58 +562,140 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="grid gap-8 border-t border-white/10 py-24 md:grid-cols-[0.45fr_1fr]">
+        <section id="contact" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
           <SectionHeading eyebrow={t.contactEyebrow} title={t.contactTitle} />
-          <div className="rounded-[34px] border border-cyan-400/15 bg-slate-950/60 p-8 text-white">
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">{t.contactText}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="rounded-full bg-white px-5 py-3 text-sm font-medium text-slate-950"
-              >
-                {t.copyEmail}
-              </button>
-              <a
-                href="mailto:ndirakozeheritier@gmail.com"
-                className="rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white"
-              >
-                {t.sendEmail}
-              </a>
-              <a
-                href={cvPdf}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white"
-              >
-                {t.pdfCta}
-              </a>
-            </div>
-            <p className="mt-5 min-h-6 text-sm text-cyan-200">{copied ? t.copied : ""}</p>
-            <div className="mt-10 grid gap-4 border-t border-white/10 pt-6 md:grid-cols-2">
-              <a href="mailto:ndirakozeheritier@gmail.com" className="text-slate-300 transition hover:text-white">
-                ndirakozeheritier@gmail.com
-              </a>
-              <a href="tel:+250793240559" className="text-slate-300 transition hover:text-white">
-                +250 793 240 559
-              </a>
+          <div className="space-y-12">
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div className="rounded-[34px] border border-slate-200 bg-white p-8 dark:border-white/10 dark:bg-slate-900/50">
+                <form onSubmit={handleFormSubmit} className="space-y-5">
+                  <div>
+                    <label className="mb-2 block text-sm font-bold text-slate-700 dark:text-slate-300">
+                      {t.formName}
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                      <input
+                        required
+                        name="name"
+                        type="text"
+                        placeholder="John Doe"
+                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 text-slate-900 outline-none transition focus:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:border-cyan-400"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-bold text-slate-700 dark:text-slate-300">
+                      {t.formSubject}
+                    </label>
+                    <div className="relative">
+                      <Type className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                      <input
+                        required
+                        name="subject"
+                        type="text"
+                        placeholder="Project Inquiry"
+                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 text-slate-900 outline-none transition focus:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:border-cyan-400"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-bold text-slate-700 dark:text-slate-300">
+                      {t.formMessage}
+                    </label>
+                    <div className="relative">
+                      <MessageSquare className="absolute left-4 top-4 text-slate-400" size={18} />
+                      <textarea
+                        required
+                        name="message"
+                        rows="4"
+                        placeholder="Hello, I would like to..."
+                        className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 text-slate-900 outline-none transition focus:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:border-cyan-400"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 py-4 text-sm font-bold text-white transition hover:bg-blue-700 dark:bg-cyan-400 dark:text-slate-950 dark:hover:bg-cyan-300"
+                  >
+                    <Send size={18} />
+                    {t.formSend}
+                  </button>
+                </form>
+              </div>
+
+              <div className="flex flex-col gap-6">
+                <div className="rounded-[34px] border border-slate-200 bg-white p-8 dark:border-white/10 dark:bg-slate-900/50">
+                  <h3 className="mb-6 text-xl font-bold text-slate-900 dark:text-white">{t.socialsTitle}</h3>
+                  <div className="grid gap-3">
+                    {socials.map((social) => (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition hover:border-blue-200 hover:bg-blue-50 dark:border-white/5 dark:bg-white/5 dark:hover:border-cyan-400/30 dark:hover:bg-cyan-400/5"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-slate-600 shadow-sm transition group-hover:text-blue-600 dark:bg-white/10 dark:text-slate-400 dark:group-hover:text-cyan-300">
+                            <social.icon size={20} />
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold text-slate-900 dark:text-white">{social.name}</p>
+                            <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{social.handle}</p>
+                          </div>
+                        </div>
+                        <ExternalLink size={16} className="text-slate-300 group-hover:text-blue-400 dark:text-slate-600 dark:group-hover:text-cyan-400" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-[34px] border border-blue-100 bg-blue-50 p-8 dark:border-cyan-400/10 dark:bg-cyan-400/5">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600 shadow-sm dark:bg-cyan-400 dark:text-slate-950">
+                      <Mail size={24} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-300">Email Me</p>
+                      <a href="mailto:ndirakozeheritier@gmail.com" className="text-lg font-bold text-slate-900 dark:text-white">
+                        ndirakozeheritier@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                  <div className="mt-6 flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600 shadow-sm dark:bg-cyan-400 dark:text-slate-950">
+                      <Phone size={24} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-300">Call Me</p>
+                      <a href="tel:+250793240559" className="text-lg font-bold text-slate-900 dark:text-white">
+                        +250 793 240 559
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-8">
-        <div className="mx-auto flex w-[min(1180px,calc(100%-28px))] flex-col gap-3 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-col gap-2">
-            <p>{t.footerBlurb}</p>
-            <p className="text-cyan-200">
-              {locale === "rw" ? "Abasuye uru rubuga" : "Website visits"}:{" "}
-              <span className="font-semibold text-white">
-                {visits ?? (locale === "rw" ? "Birabarwa..." : "Counting...")}
-              </span>
-            </p>
+      <footer className="border-t border-slate-200 py-12 dark:border-white/10">
+        <div className="mx-auto flex w-[min(1180px,calc(100%-28px))] flex-col gap-8 text-sm text-slate-500 dark:text-slate-400 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4">
+            <p className="font-medium">{t.footerBlurb}</p>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 font-bold text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75 dark:bg-cyan-400"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500 dark:bg-cyan-500"></span>
+                </span>
+                {locale === "rw" ? "Abasuye uru rubuga" : "Live Visitors"}:{" "}
+                {visits ?? (locale === "rw" ? "..." : "...")}
+              </div>
+            </div>
           </div>
-          <p>© 2026 Heritier Ndayishimiye Irakoze. {t.rights}</p>
+          <p className="font-medium">© 2026 Heritier Ndayishimiye Irakoze. {t.rights}</p>
         </div>
       </footer>
     </div>
@@ -532,9 +705,9 @@ function App() {
 function SectionHeading({ eyebrow, title, lead }) {
   return (
     <div>
-      <p className="text-sm uppercase tracking-[0.28em] text-cyan-300">{eyebrow}</p>
-      <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{title}</h2>
-      {lead ? <p className="mt-4 max-w-xs text-base leading-8 text-slate-400">{lead}</p> : null}
+      <p className="text-sm font-bold uppercase tracking-[0.28em] text-blue-600 dark:text-cyan-300">{eyebrow}</p>
+      <h2 className="mt-4 text-3xl font-extrabold leading-tight text-slate-900 dark:text-white">{title}</h2>
+      {lead ? <p className="mt-4 max-w-xs text-base font-medium leading-8 text-slate-500 dark:text-slate-400">{lead}</p> : null}
     </div>
   );
 }
