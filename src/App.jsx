@@ -81,7 +81,7 @@ const content = {
       },
       {
         title: "Technical Skills",
-        items: ["Web Design", "Web Development", "UI Design"],
+        items: ["Web Design", "Web Development", "UI Design", "Backend Development", "IoT and Embedded Systems"],
       },
     ],
     galleryEyebrow: "gallery",
@@ -190,7 +190,7 @@ const content = {
       },
       {
         title: "Ubumenyi bwa Tekiniki",
-        items: ["Web Design", "Web Development", "UI Design"],
+        items: ["Web Design", "Web Development", "UI Design", "Backend Development", "IoT and Embedded Systems"],
       },
     ],
     galleryEyebrow: "amafoto",
@@ -427,10 +427,14 @@ function App() {
 
           <div className="justify-self-start md:justify-self-end">
             <div className="relative flex h-[320px] w-[260px] items-end overflow-hidden rounded-[38px] border border-slate-200 bg-white p-7 shadow-xl dark:border-cyan-400/15 dark:bg-slate-950/50 dark:shadow-panel sm:h-[420px] sm:w-[320px]">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(59,130,246,0.05),rgba(255,255,255,0))] dark:bg-[linear-gradient(180deg,rgba(96,165,250,0.18),rgba(2,8,23,0.2))]" />
-              <div className="relative">
-                <div className="mb-4 h-20 w-20 rounded-full border border-blue-200 bg-blue-50 dark:border-cyan-300/40 dark:bg-white/10" />
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-blue-600 dark:text-cyan-200">{t.locationLine}</p>
+              <img 
+                src={photo2} 
+                alt="Heritier Irakoze" 
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,rgba(255,255,255,0.9))] dark:bg-[linear-gradient(180deg,transparent_60%,rgba(8,17,32,0.9))]" />
+              <div className="relative z-10 w-full">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-blue-700 dark:text-cyan-200">{t.locationLine}</p>
                 <p className="mt-2 text-2xl font-extrabold text-slate-900 dark:text-white">HI</p>
               </div>
             </div>
