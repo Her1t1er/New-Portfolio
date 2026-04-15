@@ -672,7 +672,6 @@ function App() {
                         required
                         name="subject"
                         type="text"
-                        placeholder="Project Inquiry"
                         className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 text-slate-900 outline-none transition focus:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:border-cyan-400"
                       />
                     </div>
@@ -687,7 +686,6 @@ function App() {
                         required
                         name="message"
                         rows="4"
-                        placeholder="Hello, I would like to..."
                         className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 text-slate-900 outline-none transition focus:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:border-cyan-400"
                       />
                     </div>
