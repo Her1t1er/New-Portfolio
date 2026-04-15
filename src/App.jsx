@@ -92,6 +92,7 @@ const content = {
     projects: [
       {
         title: "YouthGuard",
+        category: "Featured Project",
         description: "A platform designed to help people locate available contraceptives easily and safely. By providing clear information on where to find specific products, the system saves time and reduces the stigma associated with seeking reproductive health resources, ultimately promoting safer choices and preventing STIs and unwanted pregnancies.",
         tags: ["Web App", "Healthcare", "Social Impact"],
         image: youthguard,
@@ -99,6 +100,7 @@ const content = {
       },
       {
         title: "Smart_buld",
+        category: "Personal Project",
         description: "An IoT project that allows users to remotely switch house lights and monitor their status online via a smartphone. It provides convenience and energy management through a modern, connected interface.",
         tags: ["IoT", "Mobile Control", "Home Automation"],
         image: bulb,
@@ -123,7 +125,7 @@ const content = {
       { name: "Kinyarwanda", level: "Native" },
       { name: "English", level: "Proficiency" },
       { name: "French", level: "Basic" },
-      { name: "Swahili", level: "Medium" },
+      { name: "Swahili", level: "Moderate" },
     ],
     interestsEyebrow: "interests",
     interestsTitle: "What Interests Me",
@@ -220,6 +222,7 @@ const content = {
     projects: [
       {
         title: "YouthGuard",
+        category: "Umushinga wa mbere",
         description: "Urubuga rufasha abantu kumenya aho bakura uburyo bwo kuboneza urubyaro mu buryo bworoshye kandi bwizewe. Mugutanga amakuru asobanutse, ubu buryo bugabanya igihe n'isoni zo kubaza, bikarinda indwara n'inda zitateganyijwe.",
         tags: ["Web App", "Ubuzima", "Imibereho Myiza"],
         image: youthguard,
@@ -227,6 +230,7 @@ const content = {
       },
       {
         title: "Smart_buld",
+        category: "Umushinga bwite",
         description: "Umushinga wa IoT ufasha abantu gukoresha amatara yo mu rugo bifashishije terefone binyuze kuri interineti. Bituma gukoresha ingufu biba byiza kandi byoroshye.",
         tags: ["IoT", "Terefone", "Urugo Rugezweho"],
         image: bulb,
@@ -562,6 +566,14 @@ function App() {
                     />
                   )}
                   <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors" />
+                  
+                  {project.category && (
+                    <div className="absolute left-6 top-6">
+                      <span className="rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-900 shadow-sm backdrop-blur-md dark:bg-slate-900/80 dark:text-white">
+                        {project.category}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 <div className="flex flex-1 flex-col p-8">
