@@ -244,7 +244,7 @@ const content = {
 const socials = [
   { name: "Instagram", icon: Instagram, url: "https://instagram.com/heritier._", handle: "@heritier._" },
   { name: "Twitter", icon: Twitter, url: "https://x.com/ik1nege", handle: "@ik1nege" },
-  { name: "GitHub", icon: Github, url: "https://github.com/her1tier", handle: "her1tier" },
+  { name: "GitHub", icon: Github, url: "https://github.com/Her1t1er", handle: "Her1t1er" },
   { name: "Telegram", icon: Send, url: "https://t.me/her1tier", handle: "@her1tier" },
   { name: "LeetCode", icon: Code2, url: "https://leetcode.com/u/heritier_/", handle: "heritier_" },
 ];
