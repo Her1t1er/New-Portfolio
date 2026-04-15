@@ -19,6 +19,8 @@ import cvPdf from "../CV.pdf";
 import photo2 from "../photos/IMG_0876.JPG";
 import photo3 from "../photos/IMG_1621.jpg";
 import photo4 from "../photos/IMG_2778.JPEG";
+import youthguard from "../photos/youthguard.png";
+import bulb from "../photos/bulb.png";
 
 const content = {
   en: {
@@ -26,6 +28,7 @@ const content = {
       { id: "overview", label: "About" },
       { id: "education", label: "Education" },
       { id: "skills", label: "Skills" },
+      { id: "projects", label: "Projects" },
       { id: "gallery", label: "Gallery" },
       { id: "credentials", label: "Awards" },
       { id: "contact", label: "Contact" },
@@ -84,6 +87,24 @@ const content = {
         items: ["Web Design", "Web Development", "UI Design", "Backend Development", "IoT and Embedded Systems"],
       },
     ],
+    projectsEyebrow: "projects",
+    projectsTitle: "Recent Work",
+    projects: [
+      {
+        title: "YouthGuard",
+        description: "A platform designed to help people locate available contraceptives easily and safely. By providing clear information on where to find specific products, the system saves time and reduces the stigma associated with seeking reproductive health resources, ultimately promoting safer choices and preventing STIs and unwanted pregnancies.",
+        tags: ["Web App", "Healthcare", "Social Impact"],
+        image: youthguard,
+        color: "from-blue-600/20 to-cyan-400/20"
+      },
+      {
+        title: "Smart_buld",
+        description: "An IoT project that allows users to remotely switch house lights and monitor their status online via a smartphone. It provides convenience and energy management through a modern, connected interface.",
+        tags: ["IoT", "Mobile Control", "Home Automation"],
+        image: bulb,
+        color: "from-orange-500/20 to-yellow-400/20"
+      }
+    ],
     galleryEyebrow: "gallery",
     galleryTitle: "Moments & Memories",
     galleryImages: [
@@ -135,6 +156,7 @@ const content = {
       { id: "overview", label: "Incamake" },
       { id: "education", label: "Amashuri" },
       { id: "skills", label: "Ubumenyi" },
+      { id: "projects", label: "Imishinga" },
       { id: "gallery", label: "Amafoto" },
       { id: "credentials", label: "Impamyabushobozi" },
       { id: "contact", label: "Twandikire" },
@@ -192,6 +214,24 @@ const content = {
         title: "Ubumenyi bwa Tekiniki",
         items: ["Web Design", "Web Development", "UI Design", "Backend Development", "IoT and Embedded Systems"],
       },
+    ],
+    projectsEyebrow: "imishinga",
+    projectsTitle: "Ibyo nakoze vuba",
+    projects: [
+      {
+        title: "YouthGuard",
+        description: "Urubuga rufasha abantu kumenya aho bakura uburyo bwo kuboneza urubyaro mu buryo bworoshye kandi bwizewe. Mugutanga amakuru asobanutse, ubu buryo bugabanya igihe n'isoni zo kubaza, bikarinda indwara n'inda zitateganyijwe.",
+        tags: ["Web App", "Ubuzima", "Imibereho Myiza"],
+        image: youthguard,
+        color: "from-blue-600/20 to-cyan-400/20"
+      },
+      {
+        title: "Smart_buld",
+        description: "Umushinga wa IoT ufasha abantu gukoresha amatara yo mu rugo bifashishije terefone binyuze kuri interineti. Bituma gukoresha ingufu biba byiza kandi byoroshye.",
+        tags: ["IoT", "Terefone", "Urugo Rugezweho"],
+        image: bulb,
+        color: "from-orange-500/20 to-yellow-400/20"
+      }
     ],
     galleryEyebrow: "amafoto",
     galleryTitle: "Ibihe n'Urwibutso",
@@ -502,6 +542,40 @@ function App() {
                       {item}
                     </span>
                   ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
+          <SectionHeading eyebrow={t.projectsEyebrow} title={t.projectsTitle} />
+          <div className="grid gap-8 lg:grid-cols-2">
+            {t.projects.map((project) => (
+              <div key={project.title} className="group relative flex flex-col overflow-hidden rounded-[34px] border border-slate-200 bg-white transition-all hover:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:hover:border-cyan-400">
+                <div className={`relative aspect-video w-full overflow-hidden bg-gradient-to-br ${project.color}`}>
+                  {project.image && (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors" />
+                </div>
+                
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-cyan-400">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="mt-4 text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                    {project.description}
+                  </p>
                 </div>
               </div>
             ))}
