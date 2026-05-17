@@ -13,7 +13,9 @@ import {
   User, 
   Type,
   ExternalLink,
-  MapPin
+  MapPin,
+  Plus,
+  Minus
 } from "lucide-react";
 import cvPdf from "../CV.pdf";
 import photo2 from "../photos/IMG_0876.JPG";
@@ -21,6 +23,7 @@ import photo3 from "../photos/IMG_1621.jpg";
 import photo4 from "../photos/IMG_2778.JPEG";
 import youthguard from "../photos/youthguard.png";
 import bulb from "../photos/bulb.png";
+import ubaka from "../photos/ubaka.png";
 
 const content = {
   en: {
@@ -88,23 +91,54 @@ const content = {
       },
     ],
     projectsEyebrow: "projects",
-    projectsTitle: "Recent Work",
+    projectsTitle: "Featured Work",
     projects: [
+      {
+        title: "Ubaka",
+        category: "featured project",
+        description: "A digital marketplace that bridges the gap between homeowners and qualified engineers. It simplifies the construction process by providing a secure and efficient platform to hire professional engineering expertise for building projects.",
+        tags: ["Construction", "Engineering", "Web App"],
+        image: ubaka,
+        color: "from-emerald-500/20 to-teal-400/20",
+        url: "https://ubaka-jpno.onrender.com/"
+      },
+      {
+        title: "The Premium Catering",
+        category: "personal project",
+        description: "A professional catering service website designed to showcase culinary excellence and manage event bookings. It features a modern interface for exploring menus and services, providing a seamless user experience.",
+        tags: ["Catering", "Service Platform", "UI/UX"],
+        color: "from-amber-500/20 to-orange-400/20",
+        url: "https://thepremiumcatering.netlify.app/"
+      }
+    ],
+    moreProjectsEyebrow: "more projects",
+    moreProjectsTitle: "Other Notable Works",
+    moreProjects: [
       {
         title: "YouthGuard",
         category: "Featured Project",
-        description: "A platform designed to help people locate available contraceptives easily and safely. By providing clear information on where to find specific products, the system saves time and reduces the stigma associated with seeking reproductive health resources, ultimately promoting safer choices and preventing STIs and unwanted pregnancies.",
+        description: "A platform designed to help people locate available contraceptives easily and safely. By providing clear information, the system saves time and reduces stigma associated with reproductive health resources.",
         tags: ["Web App", "Healthcare", "Social Impact"],
         image: youthguard,
-        color: "from-blue-600/20 to-cyan-400/20"
+        color: "from-blue-600/20 to-cyan-400/20",
+        url: "#"
       },
       {
-        title: "Smart_buld",
+        title: "Smart_bulb",
         category: "Personal Project",
-        description: "An IoT project that allows users to remotely switch house lights and monitor their status online via a smartphone. It provides convenience and energy management through a modern, connected interface.",
+        description: "An IoT project that allows users to remotely switch house lights and monitor their status online via a smartphone. It provides convenience and energy management through a modern interface.",
         tags: ["IoT", "Mobile Control", "Home Automation"],
         image: bulb,
-        color: "from-orange-500/20 to-yellow-400/20"
+        color: "from-orange-500/20 to-yellow-400/20",
+        url: "#"
+      },
+      {
+        title: "Simba Market",
+        category: "Personal Project",
+        description: "An online marketplace platform designed for modern e-commerce needs. It provides a robust environment for buying and selling products with a focus on speed and user convenience.",
+        tags: ["E-commerce", "Marketplace", "Web Development"],
+        color: "from-red-600/20 to-yellow-500/20",
+        url: "https://simba-market.vercel.app/"
       }
     ],
     galleryEyebrow: "gallery",
@@ -218,23 +252,54 @@ const content = {
       },
     ],
     projectsEyebrow: "imishinga",
-    projectsTitle: "Ibyo nakoze vuba",
+    projectsTitle: "Imishinga y'ingenzi",
     projects: [
+      {
+        title: "Ubaka",
+        category: "umushinga wa mbere",
+        description: "Urubuga ruhuza abubatsi n'abanyamwuga mu by'ubwubatsi (engineers). Rworoherereza abantu kubona abahanga bizerwa babafasha mu mishinga yabo yo kubaka amazu mu buryo bwisanzuye kandi bwizewe.",
+        tags: ["Ubwubatsi", "Engineers", "Web App"],
+        image: ubaka,
+        color: "from-emerald-500/20 to-teal-400/20",
+        url: "https://ubaka-jpno.onrender.com/"
+      },
+      {
+        title: "The Premium Catering",
+        category: "umushinga bwite",
+        description: "Urubuga rw'ubucuruzi bwa catering rwubatswe mu buryo bugezweho kugira ngo rworohereze abantu kureba amafunguro no gutumira serivisi mu birori bitandukanye.",
+        tags: ["Catering", "Serivisi", "UI/UX"],
+        color: "from-amber-500/20 to-orange-400/20",
+        url: "https://thepremiumcatering.netlify.app/"
+      }
+    ],
+    moreProjectsEyebrow: "yindi mishinga",
+    moreProjectsTitle: "Ibindi bikorwa nakoze",
+    moreProjects: [
       {
         title: "YouthGuard",
         category: "Umushinga wa mbere",
-        description: "Urubuga rufasha abantu kumenya aho bakura uburyo bwo kuboneza urubyaro mu buryo bworoshye kandi bwizewe. Mugutanga amakuru asobanutse, ubu buryo bugabanya igihe n'isoni zo kubaza, bikarinda indwara n'inda zitateganyijwe.",
+        description: "Urubuga rufasha abantu kumenya aho bakura uburyo bwo kuboneza urubyaro mu buryo bworoshye kandi bwizewe. Mugutanga amakuru asobanutse.",
         tags: ["Web App", "Ubuzima", "Imibereho Myiza"],
         image: youthguard,
-        color: "from-blue-600/20 to-cyan-400/20"
+        color: "from-blue-600/20 to-cyan-400/20",
+        url: "#"
       },
       {
-        title: "Smart_buld",
+        title: "Smart_bulb",
         category: "Umushinga bwite",
         description: "Umushinga wa IoT ufasha abantu gukoresha amatara yo mu rugo bifashishije terefone binyuze kuri interineti. Bituma gukoresha ingufu biba byiza kandi byoroshye.",
         tags: ["IoT", "Terefone", "Urugo Rugezweho"],
         image: bulb,
-        color: "from-orange-500/20 to-yellow-400/20"
+        color: "from-orange-500/20 to-yellow-400/20",
+        url: "#"
+      },
+      {
+        title: "Simba Market",
+        category: "Umushinga Bwite",
+        description: "Isoko ryo kuri interineti ryubatswe kugira ngo ryorohereze abantu kugura no kugurisha ibintu bitandukanye. Ryibanda ku kwihuta no korohereza uwinjiyeho.",
+        tags: ["Ubucuruzi", "Isoko", "Ikoranabuhanga"],
+        color: "from-red-600/20 to-yellow-500/20",
+        url: "https://simba-market.vercel.app/"
       }
     ],
     galleryEyebrow: "amafoto",
@@ -299,6 +364,7 @@ function App() {
   const [locale, setLocale] = useState(() => localStorage.getItem("cv-locale") || "en");
   const [theme, setTheme] = useState(() => localStorage.getItem("cv-theme") || "dark");
   const [visits, setVisits] = useState(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
   const t = content[locale];
 
   useEffect(() => {
@@ -552,45 +618,55 @@ function App() {
           </div>
         </section>
 
-        <section id="projects" className="grid gap-12 border-t border-slate-200 py-24 dark:border-white/10 md:grid-cols-[0.45fr_1fr]">
-          <SectionHeading eyebrow={t.projectsEyebrow} title={t.projectsTitle} />
-          <div className="grid gap-8 lg:grid-cols-2">
-            {t.projects.map((project) => (
-              <div key={project.title} className="group relative flex flex-col overflow-hidden rounded-[34px] border border-slate-200 bg-white transition-all hover:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:hover:border-cyan-400">
-                <div className={`relative aspect-video w-full overflow-hidden bg-gradient-to-br ${project.color}`}>
-                  {project.image && (
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors" />
-                  
-                  {project.category && (
-                    <div className="absolute left-6 top-6">
-                      <span className="rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-900 shadow-sm backdrop-blur-md dark:bg-slate-900/80 dark:text-white">
-                        {project.category}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="flex flex-1 flex-col p-8">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-cyan-400">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="mt-4 text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
-                    {project.description}
-                  </p>
-                </div>
+        <section id="projects" className="border-t border-slate-200 py-24 dark:border-white/10">
+          <div className="grid gap-12 md:grid-cols-[0.45fr_1fr]">
+            <SectionHeading eyebrow={t.projectsEyebrow} title={t.projectsTitle} />
+            <div className="flex flex-col gap-12">
+              <div className="grid gap-8 lg:grid-cols-2">
+                {t.projects.map((project) => (
+                  <ProjectCard key={project.title} project={project} />
+                ))}
               </div>
-            ))}
+
+              {!showAllProjects && (
+                <div className="flex justify-center md:justify-start">
+                  <button
+                    onClick={() => setShowAllProjects(true)}
+                    className="group flex items-center gap-3 rounded-full border border-slate-200 bg-white px-8 py-4 text-sm font-bold text-slate-900 transition hover:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-cyan-400"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 transition group-hover:bg-blue-600 group-hover:text-white dark:bg-white/10 dark:group-hover:bg-cyan-400 dark:group-hover:text-slate-950">
+                      <Plus size={18} />
+                    </div>
+                    {locale === "rw" ? "Reba ibindi" : "Show More Projects"}
+                  </button>
+                </div>
+              )}
+
+              {showAllProjects && (
+                <div className="space-y-12">
+                  <div className="h-px w-full bg-slate-200 dark:bg-white/10" />
+                  <div className="grid gap-12 md:grid-cols-[0.45fr_1fr]">
+                    <SectionHeading eyebrow={t.moreProjectsEyebrow} title={t.moreProjectsTitle} />
+                    <div className="grid gap-8 lg:grid-cols-2">
+                      {t.moreProjects.map((project) => (
+                        <ProjectCard key={project.title} project={project} />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex justify-center md:justify-start">
+                    <button
+                      onClick={() => setShowAllProjects(false)}
+                      className="group flex items-center gap-3 rounded-full border border-slate-200 bg-white px-8 py-4 text-sm font-bold text-slate-900 transition hover:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-cyan-400"
+                    >
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 transition group-hover:bg-blue-600 group-hover:text-white dark:bg-white/10 dark:group-hover:bg-cyan-400 dark:group-hover:text-slate-950">
+                        <Minus size={18} />
+                      </div>
+                      {locale === "rw" ? "Gufunga" : "Show Less"}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
@@ -788,6 +864,66 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function ProjectCard({ project }) {
+  const isExternal = project.url && project.url.startsWith("http");
+  
+  return (
+    <a 
+      href={project.url}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noreferrer" : undefined}
+      className={`group relative flex flex-col overflow-hidden rounded-[34px] border border-slate-200 bg-white transition-all hover:border-blue-400 dark:border-white/10 dark:bg-white/5 dark:hover:border-cyan-400 ${!project.url || project.url === "#" ? "cursor-default" : "cursor-pointer"}`}
+      onClick={(e) => {
+        if (!project.url || project.url === "#") e.preventDefault();
+      }}
+    >
+      <div className={`relative aspect-video w-full overflow-hidden bg-gradient-to-br ${project.color}`}>
+        {project.image ? (
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : isExternal ? (
+          <div className="absolute inset-0 overflow-hidden bg-white/50">
+            <iframe 
+              src={project.url}
+              title={project.title}
+              className="pointer-events-none absolute left-0 top-0 h-[400%] w-[400%] origin-top-left scale-[0.25] border-0 transition-transform duration-500 group-hover:scale-[0.26]"
+              tabIndex={-1}
+              aria-hidden="true"
+            />
+          </div>
+        ) : null}
+        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors" />
+        
+        {project.category && (
+          <div className="absolute left-6 top-6">
+            <span className="rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-900 shadow-sm backdrop-blur-md dark:bg-slate-900/80 dark:text-white">
+              {project.category}
+            </span>
+          </div>
+        )}
+
+        {isExternal && (
+          <div className="absolute right-6 top-6 opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur-md dark:bg-slate-900/80">
+              <ExternalLink size={18} className="text-slate-900 dark:text-white" />
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <div className="flex flex-1 flex-col p-8">
+        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
+        <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+          {project.description}
+        </p>
+      </div>
+    </a>
   );
 }
 
