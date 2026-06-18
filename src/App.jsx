@@ -108,7 +108,7 @@ const content = {
         description: "A professional catering service website designed to showcase culinary excellence and manage event bookings. It features a modern interface for exploring menus and services, providing a seamless user experience.",
         tags: ["Catering", "Service Platform", "UI/UX"],
         color: "from-amber-500/20 to-orange-400/20",
-        url: "https://thepremiumcatering.netlify.app/"
+        url: "https://thepremiumcatering.vercel.app/"
       }
     ],
     moreProjectsEyebrow: "more projects",
@@ -269,7 +269,7 @@ const content = {
         description: "Urubuga rw'ubucuruzi bwa catering rwubatswe mu buryo bugezweho kugira ngo rworohereze abantu kureba amafunguro no gutumira serivisi mu birori bitandukanye.",
         tags: ["Catering", "Serivisi", "UI/UX"],
         color: "from-amber-500/20 to-orange-400/20",
-        url: "https://thepremiumcatering.netlify.app/"
+        url: "https://thepremiumcatering.vercel.app/"
       }
     ],
     moreProjectsEyebrow: "yindi mishinga",
